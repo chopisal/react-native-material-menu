@@ -19,12 +19,15 @@ const STATES = {
   SHOWN: 'SHOWN',
 };
 
-const ANIMATION_DURATION = 300;
 const EASING = Easing.bezier(0.4, 0, 0.2, 1);
 const SCREEN_INDENT = 8;
 
 class Menu extends React.Component {
   _container = null;
+
+  static defaultProps = {
+    animationDuration : 300
+  }
 
   state = {
     menuState: STATES.HIDDEN,
@@ -52,6 +55,7 @@ class Menu extends React.Component {
       return;
     }
 
+    const { animationDuration } = this.props;
     const { width, height } = e.nativeEvent.layout;
 
     this.setState(
@@ -64,12 +68,12 @@ class Menu extends React.Component {
         Animated.parallel([
           Animated.timing(this.state.menuSizeAnimation, {
             toValue: { x: width, y: height },
-            duration: ANIMATION_DURATION,
+            duration: animationDuration,
             easing: EASING,
           }),
           Animated.timing(this.state.opacityAnimation, {
             toValue: 1,
-            duration: ANIMATION_DURATION,
+            duration: animationDuration,
             easing: EASING,
           }),
         ]).start();
@@ -98,9 +102,10 @@ class Menu extends React.Component {
   };
 
   hide = () => {
+    const { animationDuration } = this.props;
     Animated.timing(this.state.opacityAnimation, {
       toValue: 0,
-      duration: ANIMATION_DURATION,
+      duration: animationDuration,
       easing: EASING,
     }).start(() => {
       // Reset state
