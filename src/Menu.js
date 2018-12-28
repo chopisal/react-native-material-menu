@@ -160,7 +160,10 @@ class Menu extends React.Component {
         translateY: Animated.multiply(menuSizeAnimation.y, -1),
       });
 
-      top = Math.min(dimensions.height - SCREEN_INDENT, top + buttonHeight);
+      // top = Math.min(dimensions.height - SCREEN_INDENT, top + buttonHeight);
+      top = Math.min(dimensions.height - SCREEN_INDENT, top);
+    } else {
+      top = top + buttonHeight;
     }
 
     const shadowMenuContainerStyle = {
