@@ -70,11 +70,13 @@ class Menu extends React.Component {
             toValue: { x: width, y: height },
             duration: animationDuration,
             easing: EASING,
+            useNativeDriver: false,
           }),
           Animated.timing(this.state.opacityAnimation, {
             toValue: 1,
             duration: animationDuration,
             easing: EASING,
+            useNativeDriver: false,
           }),
         ]).start();
       },
